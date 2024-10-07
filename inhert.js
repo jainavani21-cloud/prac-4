@@ -1,29 +1,38 @@
-// Base class (Parent)
-class Animal {
-    constructor(name) {
+class Person {
+    constructor(name, age) {
         this.name = name;
+        this.age = age;
     }
 
-    speak() {
-        console.log(`${this.name} makes a sound.`);
-    }
-}
 
-// Derived class (Child)
-class Dog extends Animal {
-    constructor(name, breed) {
-        super(name); // Calls the parent class constructor
-        this.breed = breed;
-    }
-
-    speak() {
-        console.log(`${this.name}, the ${this.breed}, barks.`);
+    displayInfo() {
+        console.log(`Name: ${this.name}, Age: ${this.age}`);
     }
 }
 
-// Usage
-const animal = new Animal('Generic Animal');
-animal.speak(); // Output: Generic Animal makes a sound.
+class Student extends Person {
+    constructor(name, age, rollNo) {
 
-const dog = new Dog('Buddy', 'Golden Retriever');
-dog.speak(); // Output: Buddy, the Golden Retriever, barks.
+        super(name, age);
+
+        if (rollNo <= 0) {
+            throw new Error("Roll number must be greater than zero.");
+        }
+
+        this.rollNo = rollNo;
+    }
+
+    displayInfo() {
+        super.displayInfo();
+        console.log(`Roll No: ${this.rollNo}`);
+    }
+}
+
+try {
+    // Creating a valid Student object
+    const student1 = new Student("Jai navani", 20, 0);
+    student1.displayInfo();
+
+} catch (error) {
+    console.error(error.message);
+}
